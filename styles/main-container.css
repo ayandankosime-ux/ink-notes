@@ -40,7 +40,7 @@ header {
 
 main {
   display: flex;
-  height: 88vh;
+  height: 85vh;
   padding: 15px;
   flex-direction: column;
 }
