@@ -1,12 +1,12 @@
 const newNoteBtn = document.querySelector('.js-btn-new-note');
 const allNotesBtn = document.querySelector('.js-btn-all-notes');
 const archiveBtn = document.querySelector('.btn-archive');
-
+const noteBoxElem = document.querySelector('.js-note-box');
 const saveBtn = document.querySelector('.js-btn-save');
+const deleteBtn = document.querySelector('.js-btn-delete');
+const noteInputElem = document.querySelector('.js-title-input');
+const noteTextInputElem = document.querySelector('.js-textbox');
 
-newNoteBtn.addEventListener('click', () => {
-  renderNoteHTML()
-});
 
 const notes = [{
   title: 'Project ideas',
@@ -14,57 +14,59 @@ const notes = [{
   time: '09:32',
   script: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit doloribus eum doloremque magnam, repellat quos quas nam dignissimos. Rerum vel porro earum dignissimos cumque ratione officiis, ad nihil itaque pariatur.',
   id:'1'
-}, {
-  title: 'Books to read',
-  date: 'Oct 09',
-  time: '19:40',
-  script: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit doloribus eum doloremque magnam, repellat quos quas nam dignissimos. Rerum vel porro earum dignissimos cumque ratione officiis, ad nihil itaque pariatur.',
-  id:'2'
-}, {
-  title: 'Study React',
-  date: 'Sep 25',
-  time: '14:05',
-  script: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit doloribus eum doloremque magnam, repellat quos quas nam dignissimos. Rerum vel porro earum dignissimos cumque ratione officiis, ad nihil itaque pariatur.',
-  id:'3'
 }];
 
+renderNotes();
 
-function renderNoteHTML() {
-  const noteBoxElem = document.querySelector('.js-note-box');
-  
+function renderNotes() {
   let noteHtml ='';
 
   for (let i = 0; i < notes.length; i++) {
     const note = notes[i];
-    noteHtml += `
-    <button class="btn-note">
-    <h3>${note.title}</h3>
-    <p>${note.date} - ${note.time}</p>
-    </button>
-  `;
+      noteHtml += `
+      <button class="btn-note">
+      <h3>${note.title}</h3>
+      <p>${note.date} - ${note.time}</p>
+      </button>
+    `;
   }
+  noteBoxElem.innerHTML = '';
   noteBoxElem.innerHTML = noteHtml;
 }
 
+newNoteBtn.addEventListener('click', () => {
+  clearNoteInput();
+});
+
 saveBtn.addEventListener('click', () => {
   saveNote();
-  renderNoteHTML();
 })
 
+function clearNoteInput() {
+  noteInputElem.value = '';
+  noteTextInputElem.value = '';
+}
+
 function saveNote() {
-  const noteInputElem = document.querySelector('.js-title-input');
-  const noteTextInputElem = document.querySelector('.js-textbox');
   const id = crypto.randomUUID();
   const script = noteTextInputElem.value;
   const title = noteInputElem.value;
 
-  if (notes[notes.length -1].title === title || notes[notes.length -1].script === script) return;
+  if (notes[notes.length -1].title === title && notes[notes.length -1].script === script) return;
   notes.push({title, script, id});
+  console.log(notes);
 
-  addNote();
+  renderNotes();
 }
 
-function addNote() {
-  
+deleteBtn.addEventListener('click', () => {
+  deleteNote();
+});
+
+function deleteNote() {
+  notes.pop(notes[notes.length -1]);
+  console.log(notes);
+
+  saveNote();
 }
 
