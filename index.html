@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Reader</title>
+  <link rel="stylesheet" href="styles/general.css">
+  <link rel="stylesheet" href="styles/sidebar.css">
+  <link rel="stylesheet" href="styles/main-container.css">
+</head>
+<body>
+  <div class="sidebar">
+    <button class="btn-new-note js-btn-new-note">NEW NOTE</button>
+    <h4>NOTES</h4>
+    <div class="notes-container">
+      <div class="note-box">
+        <button class="btn-note">
+        <h3>Project ideas</h3>
+        <p>Oct 12 - 09:32</p>
+        </button>
+        <button class="btn-note">
+          <h3>Books to Read</h3>
+          <p>Oct 12 - 09:32</p>
+        </button>
+        <button class="btn-note">
+          <h3>Project ideas</h3>
+          <p>Oct 12 - 09:32</p>
+        </button>
+      </div>
+      <div class="bottom-note-box">
+        <button class="btn-all-notes js-btn-all-notes">All Notes</button>
+        <button class="btn-archive js-btn-archive">Archive</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <header>
+      <h2>Notes</h2>
+      <div class="header-buttons">
+        <button class="btn-edit">Edit</button>
+        <button class="btn-delete">Delete</button>
+        <button class="btn-save">Save</button>
+      </div>
+    </header>
+    <main>
+      <div class="note-heading">
+        <input class="title-input" type="text" placeholder="Title">
+      </div>
+      <textarea class="textbox"></textarea>
+    </main>
+    <footer>
+      <p class="note-info-text">Created Oct 12, 2024 - 128 characters - Last edited 09:32</p>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

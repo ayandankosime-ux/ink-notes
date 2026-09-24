@@ -1,0 +1,69 @@
+.main-container {
+  height: 100vh;
+  flex-grow: 1;
+  margin: 0px;
+  margin-left: 300px;
+}
+
+h2 {
+  margin: 0px;
+  padding: 0px;
+}
+
+header {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 250px;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-save {
+  padding: 5px 20px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-edit:hover,
+.btn-delete:hover,
+.btn-save:hover {
+  background-color: rgb(236, 236, 236);
+}
+
+.btn-edit:active,
+.btn-delete:active,
+.btn-save:active {
+  background-color: rgb(212, 212, 212);
+}
+
+main {
+  display: flex;
+  height: 88vh;
+  padding: 15px;
+  flex-direction: column;
+}
+
+.title-input {
+  display: flex;
+  margin-bottom: 10px;
+  height: 55px;
+  font-size: 45px;
+  width: 100%;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  color: rgb(73, 73, 73);
+}
+
+.textbox {
+  flex-grow: 1;
+  border: none;
+  font-size:15px;
+  outline: none;
+}
+
+.note-info-text {
+  color: rgb(80, 80, 80);
+}
