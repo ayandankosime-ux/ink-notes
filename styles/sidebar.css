@@ -75,6 +75,7 @@ h3 {
   gap: 8px;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 
 .btn-all-notes,
