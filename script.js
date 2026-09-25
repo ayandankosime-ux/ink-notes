@@ -7,6 +7,8 @@ const deleteBtn = document.querySelector('.js-btn-delete');
 const noteInputElem = document.querySelector('.js-title-input');
 const noteTextInputElem = document.querySelector('.js-textbox');
 
+let currentNote = null;
+
 
 const notes = [{
   title: 'Project ideas',
@@ -24,7 +26,7 @@ function renderNotes() {
   for (let i = 0; i < notes.length; i++) {
     const note = notes[i];
       noteHtml += `
-      <button class="btn-note">
+      <button class="btn-note" onclick="selectedNote(${i})">
       <h3>${note.title}</h3>
       <p>${note.date} - ${note.time}</p>
       </button>
@@ -35,7 +37,7 @@ function renderNotes() {
 }
 
 newNoteBtn.addEventListener('click', () => {
-  clearNoteInput();
+  saveNote();
 });
 
 saveBtn.addEventListener('click', () => {
@@ -45,17 +47,27 @@ saveBtn.addEventListener('click', () => {
 function clearNoteInput() {
   noteInputElem.value = '';
   noteTextInputElem.value = '';
+  currentNote = null;
 }
 
 function saveNote() {
-  const id = crypto.randomUUID();
   const script = noteTextInputElem.value;
   const title = noteInputElem.value;
 
-  if (notes[notes.length -1].title === title && notes[notes.length -1].script === script) return;
-  notes.push({title, script, id});
-  console.log(notes);
+  if (!title && !script) return;
 
+  if (currentNote !== null) {
+    notes[currentNote].title = title;
+    notes[currentNote].script = script;
+
+  } else {
+    const id = crypto.randomUUID();
+    notes.push({title, script, id});
+
+  }
+
+  currentNote = null;
+  clearNoteInput();
   renderNotes();
 }
 
@@ -64,9 +76,20 @@ deleteBtn.addEventListener('click', () => {
 });
 
 function deleteNote() {
-  notes.pop(notes[notes.length -1]);
-  console.log(notes);
+  if (currentNote !== null) {
+    notes.splice(currentNote, 1);
+    currentNote = null;
+    
+    clearNoteInput();
+    renderNotes();
+  }
 
   saveNote();
 }
 
+function selectedNote(chosenNote) {
+  currentNote = chosenNote;
+
+  noteInputElem.value = notes[currentNote].title;
+  noteTextInputElem.value = notes[currentNote].script;
+}
