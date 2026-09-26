@@ -126,7 +126,7 @@ function clearNoteInput() {
 function saveNote() {
   const script = noteTextInputElem.value;
   const title = noteInputElem.value;
-  const date = new Date().toLocaleDateString();
+  const date = new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit'});
   const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
   const characters = noteTextInputElem.value.length;
   if (!title && !script) return;
@@ -137,6 +137,8 @@ function saveNote() {
     notes[currentNote].date = date;
     notes[currentNote].time = time;
     notes[currentNote].characters = notes[currentNote].script.length;
+    const [ editedNote ] = notes.splice(currentNote, 1);
+    notes.unshift(editedNote);
 
   } else {
     const id = crypto.randomUUID();
