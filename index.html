@@ -10,7 +10,21 @@
 </head>
 <body>
   <div class="sidebar">
-    <button class="btn-new-note js-btn-new-note">NEW NOTE</button>
+    <div class="search-container">
+      <input class="search-input js-search-input" type="text" placeholder="Search notes">
+      <button class="btn-search">
+        <img src="icons/search.png" class="search-icon">
+      </button>
+    </div>
+    <div class="tag-container">
+      <h4>TAGS</h4>
+      <div class="tag-box">
+        <button class="tag tag-work js-work-tag">#work</button>
+        <button class="tag tag-personal js-personal-tag">#personal</button>
+        <button class="tag tag-ideas js-ideas-tag">#ideas</button>
+      </div>
+      
+    </div>
     <h4>NOTES</h4>
     <div class="notes-container">
       <div class="note-box js-note-box"></div>
@@ -23,6 +37,12 @@
       <div class="header-buttons">
         <button class="btn-delete js-btn-delete">Delete</button>
         <button class="btn-save js-btn-save">Save</button>
+        <select class="btn-tag js-btn-tag" name="tag">
+          <option value="work">work</option>
+          <option value="personal">personal</option>
+          <option value="ideas">ideas</option>
+
+        </select>
       </div>
     </header>
     <main>
