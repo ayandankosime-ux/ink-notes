@@ -6,6 +6,7 @@
   border: 1px solid black;
   padding: 20px;
   background-color: white;
+  width: 220px;
 }
 
 .btn-new-note {
@@ -32,9 +33,13 @@ h4 {
 }
 
 .note-box {
-  display: grid;
-  grid-template-columns: 240px;
-  row-gap: 15px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  justify-content: start;
+  gap: 15px;
+  height: 560px;
+  overflow-y: auto;
 }
 
 .btn-note {
@@ -49,6 +54,7 @@ h4 {
   background-color: transparent;
   border-left: 5px solid rgb(87, 87, 87);
   cursor: pointer;
+  width: 100%;
 }
 
 .btn-note:hover {
