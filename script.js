@@ -131,7 +131,9 @@ function saveNote() {
   const characters = noteTextInputElem.value.length;
   if (!title && !script) return;
 
-  if (currentNote !== null) {
+  const isNewNote = currentNote === null;
+
+  if (!isNewNote) {
     notes[currentNote].title = title;
     notes[currentNote].script = script;
     notes[currentNote].date = date;
@@ -142,7 +144,7 @@ function saveNote() {
 
   } else {
     const id = crypto.randomUUID();
-    notes.push({title, script, id, time, date, characters});
+    notes.unshift({title, script, id, time, date, characters});
     
   }
 
@@ -151,6 +153,10 @@ function saveNote() {
   clearNoteInput();
   renderNotes();
   renderNoteInfo();
+
+  if (isNewNote) {
+    noteBoxElem.scrollTop = 0;
+  }
 }
 
 deleteBtn.addEventListener('click', () => {
