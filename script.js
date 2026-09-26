@@ -46,6 +46,10 @@ const notes = savedData ? JSON.parse(savedData) : [
   },
 ];
 
+document.querySelector('.js-all-tag').addEventListener('click', () => {
+  renderNotes();
+});
+
 document.querySelector('.js-work-tag').addEventListener('click', () => {
   filterNotes('work');
 });
