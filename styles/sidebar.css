@@ -3,7 +3,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  border: 1px solid black;
+  border: 1px solid rgb(230, 230, 230);
   padding: 20px;
   background-color: white;
   width: 250px;
@@ -11,41 +11,47 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  box-shadow: 5px 0px 2px rgba(236, 236, 236, 0.2);
 }
 
 
 .search-container {
   display: grid;
-  grid-template-columns: 165px 40px;
+  grid-template-columns: 175px 30px;
   column-gap: 6px;
 }
 
 .search-input {
   padding: 10px 15px;
-  border: 1px solid black;
+  border: 1px solid rgb(202, 202, 202);
   border-radius: 6px;
   background-color: white;
   cursor: pointer;
 }
 
-.btn-search {
-  padding: 5px;
-  border-radius: 50%;
-  border: none;
-  background-color: transparent;
-  transition: background-color 0.15s;
-}
-
-.btn-search:hover {
-  background-color: rgb(243, 243, 243);
-}
-
-.btn-search:active {
-  background-color: rgb(221, 221, 221);
-}
-
 .search-icon {
-  height: 25px;
+  height: 20px;
+  margin-top: 10px;
+}
+
+.btn-new-note {
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-radius: 6px;
+  background-color: white;
+  margin-top: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.15s opacity 0.15s;
+}
+
+.btn-new-note:hover {
+  background-color: black;
+  color:white;
+}
+
+.btn-new-note:active {
+  opacity: 0.4;
 }
 
 .tag-container {
@@ -59,25 +65,28 @@
 }
 
 .tag {
-  padding:5px 10px;
+  padding:5px;
   background-color: rgb(202, 202, 202);
   border-radius: 25px;
   margin: 2px;
-  color: black;
+  color: rgb(75, 74, 74);
   cursor: pointer;
   border: none;
 }
 
 .tag-work {
   background-color: lightgreen;
+  color: rgb(29, 112, 29);
 }
 
 .tag-personal {
-  background-color: lightcoral;
+  background-color: rgb(235, 171, 171);
+  color: rgb(145, 33, 33);
 }
 
 .tag-ideas {
-  background-color: lightblue;
+  background-color: rgb(199, 226, 235);
+  color: rgb(68, 128, 148);
 }
 
 h4 {
@@ -95,7 +104,7 @@ h4 {
   flex-direction: column;
   align-items: stretch;
   gap: 15px;
-  height: 470px;
+  height: 450px;
   overflow-y: auto;
 }
 
@@ -103,13 +112,12 @@ h4 {
   display: flex;
   flex-direction: column;
   text-align: start;
+  background-color: rgb(248, 248, 248);
   gap: 8px;
-  padding: 10px 15px;
+  padding: 30px 15px;
   border-radius: 4px;
   border: none;
   transition: background-color 0.15s border-left 0.15s box-shadow 0.15s;
-  background-color: transparent;
-  
   cursor: pointer;
   width: 100%;
 }
