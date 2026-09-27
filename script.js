@@ -211,8 +211,6 @@ function deleteNote() {
     clearNoteInput();
     renderNotes(notes);
   }
-
-  saveNote();
 }
 
 function renderNoteInfo(index) {
