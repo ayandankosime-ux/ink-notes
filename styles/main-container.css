@@ -21,7 +21,8 @@ header {
 
 .btn-tag,
 .btn-delete,
-.btn-save {
+.btn-save,
+.btn-pin {
   padding: 5px 20px;
   background-color: white;
   border: 1px solid rgb(212, 212, 212);
@@ -32,13 +33,15 @@ header {
 
 .btn-edit:hover,
 .btn-delete:hover,
-.btn-save:hover {
+.btn-save:hover
+.btn-pin:hover {
   background-color: rgb(236, 236, 236);
 }
 
 .btn-edit:active,
 .btn-delete:active,
-.btn-save:active {
+.btn-save:active,
+.btn-pin:active {
   background-color: rgb(212, 212, 212);
 }
 

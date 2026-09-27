@@ -25,7 +25,8 @@ const notes = savedData ? JSON.parse(savedData) : [
     script: "Mom's birthday is coming up next month. She mentioned last week that her current gardening gloves are completely worn through, so maybe a high-quality leather pair? Pair it with that specific indoor bonsai kit she was looking at on Amazon. If that falls through, Sarah suggested getting her a gift card to her favorite spa downtown.", 
     lastEdited: "21:18", 
     characters: 327, 
-    tag: "ideas" 
+    tag: "ideas",
+    isPinned: true
   },
   { 
     id: 2,
@@ -36,7 +37,8 @@ const notes = savedData ? JSON.parse(savedData) : [
     script: "Random thought for the Q4 marketing campaign: instead of doing the usual email blast, we should build a short interactive quiz for users to find their design style. It drives way better engagement. Need to pitch this to David on Monday. Rough outline: 5 questions max, simple animations, leads directly to our curated product collections.", 
     lastEdited: "11:42", 
     characters: 334, 
-    tag: "work" 
+    tag: "work",
+    isPinned: false
   },
   { 
     id: 3,
@@ -47,7 +49,8 @@ const notes = savedData ? JSON.parse(savedData) : [
     script: "Switching things up because my shoulders have been feeling super tight lately. Going to drop the heavy overhead presses for a couple of weeks and focus purely on mobility and incline dumbbell work instead. Remember to do at least 10 minutes of dynamic stretching before lifting, no skipping it just because I'm running late in the mornings.", 
     lastEdited: "06:45", 
     characters: 334, 
-    tag: "personal" 
+    tag: "personal",
+    isPinned: false
   },
   { 
     id: 4,
@@ -58,7 +61,8 @@ const notes = savedData ? JSON.parse(savedData) : [
     script: "Need to stock up on essentials for the week ahead. Grab almond milk, cold brew concentrate, avocados, chicken breasts, and a large bag of spinach for smoothies. Check if we need more olive oil or Himalayan pink salt before heading to the checkout lane. Don't forget the biodegradable trash bags this time.", 
     lastEdited: "17:35", 
     characters: 297, 
-    tag: "personal" 
+    tag: "personal",
+    isPinned: false 
   },
   { 
     id: 5,
@@ -69,7 +73,8 @@ const notes = savedData ? JSON.parse(savedData) : [
     script: "Mark highly recommended reading 'Tomorrow, and Tomorrow, and Tomorrow' for the narrative structure. Also need to finish 'Atomic Habits' before the month ends to stay on track with my routine goals. Check local library app tonight to see if either audio book version is available for immediate download.", 
     lastEdited: "14:22", 
     characters: 301, 
-    tag: "personal" 
+    tag: "personal",
+    isPinned: false 
   },
   { 
     id: 6,
@@ -80,7 +85,8 @@ const notes = savedData ? JSON.parse(savedData) : [
     script: "The authentication token seems to expire prematurely on mobile Safari browsers. Users are getting booted to the login screen mid-session. Need to inspect the cookie storage configurations and verify if the SameSite attribute is causing hidden drops. Set up a debugging session with the backend team at 2 PM.", 
     lastEdited: "10:12", 
     characters: 317, 
-    tag: "work" 
+    tag: "work",
+    isPinned: false 
   },
   { 
     id: 7,
@@ -91,7 +97,8 @@ const notes = savedData ? JSON.parse(savedData) : [
     script: "The dashboard oil change light just popped on. Mileage is hovering right around 45,000. Call the local dealership or the reliable mechanic down the street to book a standard synthetic oil swap and a quick tire rotation for Friday morning. Hopefully, they can squeeze me in early so I don't miss any work meetings.", 
     lastEdited: "08:15", 
     characters: 323, 
-    tag: "personal" 
+    tag: "personal",
+    isPinned: false 
   }
 ];
 
@@ -118,14 +125,19 @@ searchInput.addEventListener('input', (event) => {
 function renderNotes( array ) {
   let noteHtml ='';
 
+  const sortedArray = [...array].sort((a, b) => {
+    return (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0);
+  });
   
 
-  for (let i = 0; i < array.length; i++) {
-    const note = array[i];
+  for (let i = 0; i < sortedArray.length; i++) {
+    const note = sortedArray[i];
     const globalIndex = notes.indexOf(note);
+
+    const pinnedIndicator = note.isPinned ? '📌 ' : '';
       noteHtml += `
       <button class="btn-note border-${note.tag}" onclick="selectedNote(${globalIndex})">
-      <h3>${note.title || 'Untitled Note'}</h3>
+      <h3>${pinnedIndicator}${note.title || 'Untitled Note'}</h3>
       <p>${note.date} - ${note.time}</p>
       </button>
     `;
@@ -159,6 +171,8 @@ tag.addEventListener('change', (event) => {
   }
 });
 
+
+
 function saveNote() {
   const script = noteTextInputElem.value;
   const title = noteInputElem.value;
@@ -185,8 +199,9 @@ function saveNote() {
     notes.unshift(editedNote);
   } else {
     const id = crypto.randomUUID();
-    notes.unshift({title, script, time, date, characters, tag: chosenTag}); 
+    notes.unshift({title, script, time, date, characters, tag: chosenTag, isPinned: false}); 
   }
+
 
   localStorage.setItem('userData', JSON.stringify(notes));
   
@@ -225,9 +240,9 @@ function selectedNote(chosenNote) {
   noteInputElem.value = notes[currentNote].title;
   noteTextInputElem.value = notes[currentNote].script;
   renderNoteInfo(currentNote);
+  
+  pinBtn.textContent = notes[currentNote].isPinned ? "Unpin 📌" : "Pin 📌";
 }
-
-
 
 document.querySelector('.js-all-tag').addEventListener('click', () => {
 renderNotes( notes );
@@ -243,4 +258,18 @@ document.querySelector('.js-personal-tag').addEventListener('click', () => {
 
 document.querySelector('.js-ideas-tag').addEventListener('click', () => {
   filterNotes('ideas');
+});
+
+const pinBtn = document.querySelector('.js-btn-pin');
+
+pinBtn.addEventListener('click', () => {
+  if (currentNote !== null) {
+    notes[currentNote].isPinned = !notes[currentNote].isPinned;
+    
+    localStorage.setItem('userData', JSON.stringify(notes));
+    renderNotes(notes);
+    renderNoteInfo();
+    
+    pinBtn.textContent = notes[currentNote].isPinned ? "Unpin 📌" : "Pin 📌";
+  }
 });
